@@ -9,6 +9,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.venv/
 
 # Flask
 instance/
@@ -24,10 +25,18 @@ instance/
 .DS_Store
 Thumbs.db
 
-# Model files (optional - if too large for GitHub)
-# *.pt
-# *.pth
+# Model files
+*.pt
+*.pth
+*.h5
+*.pkl
 
 # Logs
-*.logisl_alphabet_model.pkl
-isl_alphabet_model.pkl
+*.log
+
+# Environment
+.env
+
+# Datasets
+dataset_download/
+alphabet_dataset/

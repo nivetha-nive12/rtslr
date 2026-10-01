@@ -375,29 +375,6 @@
       }
     }
 
-    /* ── Team card avatar ── */
-    .avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0071e3, #00b4ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 26px;
-      flex-shrink: 0;
-    }
-
-    @media (max-width: 640px) {
-      .avatar {
-        width: 56px;
-        height: 56px;
-        font-size: 20px;
-      }
-    }
-
     /* ── Gesture tag ── */
     .gesture-tag {
       padding: 6px 14px;
@@ -548,7 +525,6 @@
         <a href="#features" class="nav-link">Features</a>
         <a href="#gestures" class="nav-link">Gestures</a>
         <a href="#architecture" class="nav-link">Architecture</a>
-        <a href="#team" class="nav-link">Team</a>
       </div>
 
       <!-- Right side items (CTA + Mobile Menu) -->
@@ -587,8 +563,6 @@
           class="px-4 py-3 rounded-md text-sm font-semibold tracking-wide no-underline text-white/60 transition-all hover:text-white hover:bg-white/10 flex items-center gap-3">Gestures</a>
         <a href="#architecture"
           class="px-4 py-3 rounded-md text-sm font-semibold tracking-wide no-underline text-white/60 transition-all hover:text-white hover:bg-white/10 flex items-center gap-3">Architecture</a>
-        <a href="#team"
-          class="px-4 py-3 rounded-md text-sm font-semibold tracking-wide no-underline text-white/60 transition-all hover:text-white hover:bg-white/10 flex items-center gap-3">Team</a>
         <div class="border-t border-white/10 my-2"></div>
         <a href="/change-mode"
           class="px-4 py-3 rounded-md text-sm font-semibold tracking-wide no-underline text-[#0071e3] bg-[#0071e3]/10 transition-all hover:bg-[#0071e3]/20 flex items-center gap-3">
@@ -1668,101 +1642,7 @@
 
   <div class="section-divider"></div>
 
-  <!-- TEAM -->
-  <section id="team" class="relative py-20 sm:py-32 px-4 sm:px-6 overflow-hidden">
-    <div class="glow-orb"
-      style="width:min(500px,70vw);height:min(500px,70vw);background:rgba(0,113,227,0.10);bottom:-100px;left:50%;transform:translateX(-50%)">
-    </div>
-
-    <div class="max-w-7xl mx-auto relative z-10">
-      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-20">
-        <p class="eyebrow mb-3 sm:mb-4 aos">The Team</p>
-        <h2 class="section-title aos aos-d1">Built with purpose, passion, and late nights.</h2>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-5xl mx-auto">
-        <div class="glass-card-hover p-5 sm:p-7 aos">
-          <div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 flex-wrap">
-            <div class="avatar">KV</div>
-            <div>
-              <div class="font-semibold text-white text-sm sm:text-base">KARTHIKEYAN V</div>
-              <div class="text-[10px] sm:text-xs text-white/40 mt-0.5">Roll No: 2236010036</div>
-              <div class="text-[10px] sm:text-xs text-white/40 mt-0.5">Data Engineering & Annotation</div>
-            </div>
-          </div>
-          <p class="text-xs sm:text-sm text-white/45 leading-relaxed">Standardized the capture of 49 gestures at 45 FPS
-            to ensure high-fidelity temporal accuracy. Performed rigorous 258-dimensional data scrubbing to achieve the
-            model's 98.48% accuracy.</p>
-          <div class="flex flex-wrap gap-1.5 mt-3 sm:mt-4"><span
-              class="tech-badge text-[9px] sm:text-xs">OpenCV</span><span
-              class="tech-badge text-[9px] sm:text-xs">MediaPipe</span></div>
-        </div>
-
-        <div class="glass-card-hover p-5 sm:p-7 aos aos-d1">
-          <div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 flex-wrap">
-            <div class="avatar">AS</div>
-            <div>
-              <div class="font-semibold text-white text-sm sm:text-base">AADHITHYA S</div>
-              <div class="text-[10px] sm:text-xs text-white/40 mt-0.5">Roll No: 2236010051</div>
-              <div class="text-[10px] sm:text-xs text-white/40 mt-0.5">Data Preprocessing & Overseer</div>
-            </div>
-          </div>
-          <p class="text-xs sm:text-sm text-white/45 leading-relaxed">Built the keypoint extraction pipeline,
-            normalization logic, and EMA temporal smoothing module.</p>
-          <div class="flex flex-wrap gap-1.5 mt-3 sm:mt-4"><span
-              class="tech-badge text-[9px] sm:text-xs">OpenCV</span><span
-              class="tech-badge text-[9px] sm:text-xs">MediaPipe</span></div>
-        </div>
-
-        <div class="glass-card-hover p-5 sm:p-7 aos aos-d2">
-          <div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 flex-wrap">
-            <div class="avatar">AM</div>
-            <div>
-              <div class="font-semibold text-white text-sm sm:text-base">AMUDHAN M</div>
-              <div class="text-[10px] sm:text-xs text-white/40 mt-0.5">Roll No: 2236010061</div>
-              <div class="text-[10px] sm:text-xs text-white/40 mt-0.5">UI/UX & System Integration</div>
-            </div>
-          </div>
-          <p class="text-xs sm:text-sm text-white/45 leading-relaxed">Developed the real-time display interface, voting
-            buffer logic, and integrated all system components.</p>
-          <div class="flex flex-wrap gap-1.5 mt-3 sm:mt-4"><span class="tech-badge text-[9px] sm:text-xs">Python
-              Flask</span><span class="tech-badge text-[9px] sm:text-xs">System Design</span></div>
-        </div>
-
-        <div class="glass-card-hover p-5 sm:p-7 aos aos-d2">
-          <div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 flex-wrap">
-            <div class="avatar">D RS</div>
-            <div>
-              <div class="font-semibold text-white text-sm sm:text-base">DHARUN R S</div>
-              <div class="text-[10px] sm:text-xs text-white/40 mt-0.5">Roll No: 2236010056</div>
-              <div class="text-[10px] sm:text-xs text-white/40 mt-0.5">Training & Testing</div>
-            </div>
-          </div>
-          <p class="text-xs sm:text-sm text-white/45 leading-relaxed">Managed the multi-epoch LSTM training and
-            hyperparameter tuning to achieve a peak accuracy of 98.48%. Developed the evaluation pipeline and
-            cross-validation protocols to ensure high model reliability across all 49 gesture classes.</p>
-          <div class="flex flex-wrap gap-1.5 mt-3 sm:mt-4"><span
-              class="tech-badge text-[9px] sm:text-xs">Testing</span><span
-              class="tech-badge text-[9px] sm:text-xs">PyTorch</span></div>
-        </div>
-      </div>
-
-      <div class="mt-12 sm:mt-16 max-w-2xl mx-auto text-center aos aos-d3">
-        <div class="glass-card p-6 sm:p-8">
-          <div class="text-2xl sm:text-3xl mb-3 sm:mb-4">🎓</div>
-          <h4 class="font-display font-700 text-white text-base sm:text-lg mb-2"
-            style="font-family:'Anta',sans-serif;font-weight:700">B.E. Computer Science and Engineering — A Final Year
-            Project, 2026
-          </h4>
-          <p class="text-white/40 text-xs sm:text-sm">Department of Computer Science & Engineering,</p>
-          <p class="text-white/40 text-xs sm:text-sm">Annamalai University.</p>
-          <div class="section-divider my-4 sm:my-5"></div>
-          <p class="text-white/30 text-[10px] sm:text-xs">Guided by <span class="text-white/50">Dr. R. PRIYA</span>,
-            Professor</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
   <div class="section-divider"></div>
 
@@ -1798,7 +1678,6 @@
               Library</a>
             <a href="#architecture"
               class="block text-xs sm:text-sm text-white/50 hover:text-white transition-colors">Model Architecture</a>
-            <a href="#team" class="block text-xs sm:text-sm text-white/50 hover:text-white transition-colors">Team</a>
             <a href="/change-mode"
               class="block text-xs sm:text-sm text-white/50 hover:text-white transition-colors">Change Mode</a>
           </div>
