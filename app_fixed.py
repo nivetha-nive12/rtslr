@@ -12,6 +12,61 @@ import copy
 import itertools
 from collections import deque, Counter
 
+import pyttsx3
+import queue
+
+# ============================================================
+# TEXT TO SPEECH
+# ============================================================
+
+speech_queue = queue.Queue()
+
+def tts_worker():
+    """Dedicated Windows TTS thread."""
+    engine = pyttsx3.init("sapi5")
+
+    voices = engine.getProperty("voices")
+
+    # Microsoft Zira
+    if len(voices) >= 3:
+        engine.setProperty("voice", voices[2].id)
+
+    engine.setProperty("rate", 130)
+    engine.setProperty("volume", 1.0)
+
+    print("🔊 TTS engine started")
+
+    while True:
+        text = speech_queue.get()
+
+        if text is None:
+            break
+
+        try:
+            print(f"🔊 Speaking: {text}")
+            engine.say(str(text))
+            engine.runAndWait()
+        except Exception as e:
+            print(f"⚠️ TTS error: {e}")
+
+        speech_queue.task_done()
+
+    engine.stop()
+
+
+# Start TTS in its own thread
+tts_thread = threading.Thread(
+    target=tts_worker,
+    daemon=True
+)
+
+tts_thread.start()
+
+
+def speak_text(text):
+    """Send text to the dedicated TTS thread."""
+    if text:
+        speech_queue.put(str(text))
 
 # ============================================================
 # JAX / ml_dtypes compatibility patch
@@ -1000,19 +1055,6 @@ def generate_dynamic_frames():
 
                     try:
 
-                        # Reset the sign cycle when no hands are visible.
-                        # This is more reliable than motion variance because
-                        # a completed sign may still have non-zero variance.
-                        if not hand_res or not hand_res.multi_hand_landmarks:
-                            sequence.clear()
-                            prediction_buffer.clear()
-                            previous_landmarks = None
-                            with dynamic_lock:
-                                dynamic_state["current_prediction"] = "Waiting..."
-                                dynamic_state["confidence"] = 0.0
-                                dynamic_state["all_probs"] = {}
-                            continue
-
                         keypoints = extract_keypoints(
                             pose_res,
                             hand_res
@@ -1066,17 +1108,8 @@ def generate_dynamic_frames():
 
                             if motion_variance < 0.001:
 
-                                # No meaningful movement: reset the dynamic
-                                # gesture state so the next sign can be spoken
-                                # even if it is the same word as the previous sign.
                                 local_prediction = "Idle"
                                 local_confidence = 0.0
-                                prediction_buffer.clear()
-
-                                with dynamic_lock:
-                                    dynamic_state["current_prediction"] = "Waiting..."
-                                    dynamic_state["confidence"] = 0.0
-                                    dynamic_state["all_probs"] = {}
 
                             else:
 
@@ -1261,7 +1294,13 @@ def generate_dynamic_frames():
                                                 dynamic_state[
                                                     "total_predictions"
                                                 ] += 1
-# pyrefly: ignore [parse-error]
+
+                                                # 🔊 Speak newly detected word
+                                                speech_text = winning_gesture.replace("_", " ")
+                                                speak_text(speech_text)
+
+
+                    # pyrefly: ignore [parse-error]
                     except Exception as e:
 
                         # pyrefly: ignore [parse-error]
@@ -1805,6 +1844,10 @@ def generate_static_frames():
 
                                         last_letter = display_letter
 
+                                        # 🔊 Speak new letter / digit
+                                        speak_text(display_letter)
+                                        
+
                                         last_log_time = (
                                             now
                                         )
@@ -2052,7 +2095,7 @@ def generate_static_frames():
 def index():
 
     return render_template(
-        'change-mode.html',
+        'index.html',
         dynamic_loaded=DYNAMIC_MODEL_LOADED,
         static_loaded=STATIC_MODEL_LOADED,
         dynamic_classes=len(DYNAMIC_CLASSES),
@@ -2060,11 +2103,11 @@ def index():
     )
 
 
-@app.route('/home')
-def home():
+@app.route('/change-mode')
+def change_mode():
 
     return render_template(
-        'index.html',
+        'change-mode.html',
         dynamic_loaded=DYNAMIC_MODEL_LOADED,
         static_loaded=STATIC_MODEL_LOADED,
         dynamic_classes=len(DYNAMIC_CLASSES),

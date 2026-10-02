@@ -1,8 +1,8 @@
-# RTSLR - Indian Sign Language Recognition System
+# Signify - Indian Sign Language Recognition System
 
 ## 📋 Overview
 
-RTSLR is a real-time Indian Sign Language (ISL) recognition system powered by Deep Learning. The system uses an LSTM-based neural network to recognize 49 different ISL gestures from live webcam feed, making sign language accessible to everyone.
+Signify is a real-time Indian Sign Language (ISL) recognition system powered by Deep Learning. The system uses an LSTM-based neural network to recognize 49 different ISL gestures from live webcam feed, making sign language accessible to everyone.
 
 ## 🎯 Project Highlights
 
@@ -34,7 +34,7 @@ RTSLR is a real-time Indian Sign Language (ISL) recognition system powered by De
 ## 📁 Project Structure
 
 <pre>
-rtslr/
+Signify/
 ├── templates/
 │   ├── index.html 
 │   ├── inference.html
@@ -55,8 +55,8 @@ rtslr/
 
 ### Step 1: Clone/Download the Project
 ```bash
-git clone https://github.com/amudhan-mohan/rtslr.git
-cd rtslr
+git clone https://github.com/amudhan-mohan/Signify.git
+cd Signify
 ```
 
 ### Step 2: Create Virtual Environment (Recommended)
@@ -229,38 +229,6 @@ http://localhost:5000
 
 ---
 
-## 📄 License
-
-This project is developed for academic purposes as part of the Bachelor of Engineering program.
-
----
-
-## 👥 Team
-
-| Role | Name/Details |
-|------|--------------|
-| **Project Guide** | Dr. R. PRIYA, Professor, Annamalai University |
-| **Team Members Name** | AADHITHYA S, AMUDHAN M, DHARUN R S, KARTHIKEYAN V|
-| **Team Members Course with Year** | B.E. Computer Science and Engineering, Final Year |
-
----
-
-## 🙏 Acknowledgments
-
-- Indian Sign Language Research and Training Centre (ISLRTC)
-- MediaPipe team for pose and hand landmark detection
-- PyTorch community for deep learning frameworks
-
----
-
-## 📞 Support
-
-For issues or queries:
-
-- Check the console logs for errors
-- Ensure webcam is properly connected
-- Verify all dependencies are installed correctly
-- Make sure the model file `sign_lstm_best.pt` is in the root directory
 
 ---
 
@@ -275,8 +243,3 @@ For issues or queries:
 
 ---
 
-<div align="center">
-  
-**© 2025 RTSLR** — Final Year Project. Built with ❤️ for the deaf community of India.
-
-</div>

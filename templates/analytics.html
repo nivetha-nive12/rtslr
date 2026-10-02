@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dynamic Session Analytics — RTSLR</title>
+  <title>Dynamic Session Analytics — Signify</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Anta:wght@400;700;800&family=Ubuntu:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Anta:wght@400;700;800&family=Playfair+Display:wght@400;600;700;800&family=Ubuntu:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
     rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
     /* Custom CSS only for things Tailwind cannot handle */
     :root {
-      --bg: #04070f;
-      --surface: #0b1121;
-      --card: #101828;
-      --border: #1e2d47;
+      --bg: #f3efe6;
+      --surface: #f3efe6;
+      --card: #ffffff;
+      --border: #ffffff;
       --accent: #00e5ff;
       --accent2: #7c3aed;
       --green: #00ffa3;
@@ -82,7 +82,7 @@
     }
 
     #historyScrollContainer::-webkit-scrollbar-thumb {
-      background: #1e2d47;
+      background: #ffffff;
       border-radius: 10px;
     }
 
@@ -93,7 +93,7 @@
     /* Firefox scrollbar */
     #historyScrollContainer {
       scrollbar-width: thin;
-      scrollbar-color: #1e2d47 rgba(30, 45, 71, 0.3);
+      scrollbar-color: #ffffff rgba(30, 45, 71, 0.3);
     }
 
     /* Row hover effect */
@@ -151,43 +151,41 @@
   </style>
 </head>
 
-<body class="bg-[#04070f] text-[#e8edf5] font-['Ubuntu',sans-serif] min-h-screen overflow-x-hidden">
+<body class="bg-[#f3efe6] text-[#2d2926] font-['Ubuntu',sans-serif] min-h-screen overflow-x-hidden">
 
   <!-- Navigation with Responsive Mobile Menu -->
-  <nav class="sticky top-0 z-[100] bg-[#04070f]/85 backdrop-blur-md border-b border-[#1e2d47]">
+  <nav class="sticky top-0 z-[100] bg-[#f3efe6]/85 backdrop-blur-md border-b border-[#ffffff]">
     <div class="flex items-center justify-between px-4 sm:px-6 md:px-10 h-16">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2.5 font-extrabold text-xl tracking-tight no-underline text-[#e8edf5] font-['Anta',sans-serif]">
-        <div class="w-2.5 h-2.5 bg-[#00e5ff] rounded-full shadow-[0_0_12px_#00e5ff] animate-pulse-dot"></div>
-        RTSLR
+      <a href="/" class="flex items-center gap-1 no-underline" style="text-decoration:none">
+        <span class="text-3xl tracking-tight text-[#2d2926]" style="font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: -1px;">Sign<span class="text-[#c65533]">ify</span></span>
       </a>
 
       <!-- Desktop Navigation Links (hidden on mobile) -->
       <div class="hidden md:flex gap-0.5">
         <a href="/"
-          class="px-[18px] py-1.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#5a6a82] transition-all hover:text-[#e8edf5] hover:bg-[#0b1121]">Index</a>
-        <a href="/change-mode"
-          class="px-[18px] py-1.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#5a6a82] transition-all hover:text-[#e8edf5] hover:bg-[#0b1121]">Change Mode</a>
+          class="px-[18px] py-1.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#8c8077] transition-all hover:text-[#2d2926] hover:bg-[#f3efe6]">Index</a>
+        
         <a href="/dynamic/inference"
-          class="px-[18px] py-1.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#5a6a82] transition-all hover:text-[#e8edf5] hover:bg-[#0b1121]">Inference</a>
+          class="px-[18px] py-1.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#8c8077] transition-all hover:text-[#2d2926] hover:bg-[#f3efe6]">Inference</a>
         <a href="/dynamic/session-analytics"
           class="px-[18px] py-1.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#00e5ff] bg-[#00e5ff]/10">Session
           Analytics</a>
         <a href="/dynamic/dataset-analytics"
-          class="px-[18px] py-1.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#5a6a82] transition-all hover:text-[#e8edf5] hover:bg-[#0b1121]">Dataset
+          class="px-[18px] py-1.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#8c8077] transition-all hover:text-[#2d2926] hover:bg-[#f3efe6]">Dataset
           Analytics</a>
       </div>
 
       <!-- Refresh Button + Mobile Menu Toggle -->
       <div class="flex items-center gap-3">
         <button onclick="loadAnalytics()"
-          class="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-lg text-[0.7rem] sm:text-[0.75rem] font-bold tracking-[0.04em] uppercase border border-[#1e2d47] text-[#5a6a82] bg-transparent hover:border-[#00e5ff] hover:text-[#00e5ff] transition-all cursor-pointer font-['Anta',sans-serif]">
+          class="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-lg text-[0.7rem] sm:text-[0.75rem] font-bold tracking-[0.04em] uppercase border border-[#ffffff] text-[#8c8077] bg-transparent hover:border-[#00e5ff] hover:text-[#00e5ff] transition-all cursor-pointer font-['Anta',sans-serif]">
           ↻ Refresh
         </button>
 
         <!-- Mobile Menu Hamburger Button -->
         <button id="menuToggle"
-          class="md:hidden flex flex-col items-center justify-center w-8 h-8 rounded-md border border-[#1e2d47] bg-transparent hover:border-[#00e5ff] transition-all cursor-pointer">
+          class="md:hidden flex flex-col items-center justify-center w-8 h-8 rounded-md border border-[#ffffff] bg-transparent hover:border-[#00e5ff] transition-all cursor-pointer">
           <span class="block w-4 h-0.5 bg-[#5a6a82] rounded-full transition-all duration-300"></span>
           <span class="block w-4 h-0.5 bg-[#5a6a82] rounded-full my-1 transition-all duration-300"></span>
           <span class="block w-4 h-0.5 bg-[#5a6a82] rounded-full transition-all duration-300"></span>
@@ -197,19 +195,18 @@
 
     <!-- Mobile Menu Dropdown (hidden by default) -->
     <div id="mobileMenu"
-      class="md:hidden hidden bg-[#04070f]/95 backdrop-blur-md border-t border-[#1e2d47] overflow-hidden transition-all duration-300">
+      class="md:hidden hidden bg-[#f3efe6]/95 backdrop-blur-md border-t border-[#ffffff] overflow-hidden transition-all duration-300">
       <div class="flex flex-col py-3 px-4 space-y-1">
         <a href="/"
-          class="px-4 py-2.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#5a6a82] transition-all hover:text-[#e8edf5] hover:bg-[#0b1121] active:bg-[#0b1121]">Index</a>
-        <a href="/change-mode"
-          class="px-4 py-2.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#5a6a82] transition-all hover:text-[#e8edf5] hover:bg-[#0b1121] active:bg-[#0b1121]">Change Mode</a>
+          class="px-4 py-2.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#8c8077] transition-all hover:text-[#2d2926] hover:bg-[#f3efe6] active:bg-[#f3efe6]">Index</a>
+        
         <a href="/dynamic/inference"
-          class="px-4 py-2.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#5a6a82] transition-all hover:text-[#e8edf5] hover:bg-[#0b1121] active:bg-[#0b1121]">Inference</a>
+          class="px-4 py-2.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#8c8077] transition-all hover:text-[#2d2926] hover:bg-[#f3efe6] active:bg-[#f3efe6]">Inference</a>
         <a href="/dynamic/session-analytics"
           class="px-4 py-2.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#00e5ff] bg-[#00e5ff]/10 transition-all hover:bg-[#00e5ff]/20">Session
           Analytics</a>
         <a href="/dynamic/dataset-analytics"
-          class="px-4 py-2.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#5a6a82] transition-all hover:text-[#e8edf5] hover:bg-[#0b1121] active:bg-[#0b1121]">Dataset
+          class="px-4 py-2.5 rounded-md text-sm font-semibold tracking-wide no-underline text-[#8c8077] transition-all hover:text-[#2d2926] hover:bg-[#f3efe6] active:bg-[#f3efe6]">Dataset
           Analytics</a>
       </div>
     </div>
@@ -233,38 +230,38 @@
 
     <!-- KPI Row -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-      <div class="bg-[#101828] border border-[#1e2d47] rounded-2xl p-5 relative overflow-hidden"
+      <div class="bg-[#ffffff] border border-[#ffffff] rounded-2xl p-5 relative overflow-hidden"
         style="border-top:2px solid #00e5ff">
         <div id="kpiTotal" class="text-4xl font-extrabold tracking-[-0.05em] text-[#00e5ff] leading-tight mb-1 font-['Anta',sans-serif]">—</div>
         <div
-          class="text-[0.7rem] text-[#5a6a82] font-semibold uppercase tracking-[0.08em] font-['JetBrains_Mono',monospace]">
+          class="text-[0.7rem] text-[#8c8077] font-semibold uppercase tracking-[0.08em] font-['JetBrains_Mono',monospace]">
           Total Predictions</div>
-        <div class="text-[0.7rem] text-[#5a6a82] mt-1 font-['JetBrains_Mono',monospace]">This session</div>
+        <div class="text-[0.7rem] text-[#8c8077] mt-1 font-['JetBrains_Mono',monospace]">This session</div>
       </div>
-      <div class="bg-[#101828] border border-[#1e2d47] rounded-2xl p-5 relative overflow-hidden"
+      <div class="bg-[#ffffff] border border-[#ffffff] rounded-2xl p-5 relative overflow-hidden"
         style="border-top:2px solid #00ffa3">
         <div id="kpiAvg" class="text-4xl font-extrabold tracking-[-0.05em] text-[#00ffa3] leading-tight mb-1 font-['Anta',sans-serif]">—</div>
         <div
-          class="text-[0.7rem] text-[#5a6a82] font-semibold uppercase tracking-[0.08em] font-['JetBrains_Mono',monospace]">
+          class="text-[0.7rem] text-[#8c8077] font-semibold uppercase tracking-[0.08em] font-['JetBrains_Mono',monospace]">
           Avg Confidence</div>
-        <div class="text-[0.7rem] text-[#5a6a82] mt-1 font-['JetBrains_Mono',monospace]">Across recognized signs</div>
+        <div class="text-[0.7rem] text-[#8c8077] mt-1 font-['JetBrains_Mono',monospace]">Across recognized signs</div>
       </div>
-      <div class="bg-[#101828] border border-[#1e2d47] rounded-2xl p-5 relative overflow-hidden"
+      <div class="bg-[#ffffff] border border-[#ffffff] rounded-2xl p-5 relative overflow-hidden"
         style="border-top:2px solid #ff8c42">
         <div id="kpiUnique" class="text-4xl font-extrabold tracking-[-0.05em] text-[#ff8c42] leading-tight mb-1 font-['Anta',sans-serif]">—</div>
         <div
-          class="text-[0.7rem] text-[#5a6a82] font-semibold uppercase tracking-[0.08em] font-['JetBrains_Mono',monospace]">
+          class="text-[0.7rem] text-[#8c8077] font-semibold uppercase tracking-[0.08em] font-['JetBrains_Mono',monospace]">
           Unique Gestures</div>
-        <div class="text-[0.7rem] text-[#5a6a82] mt-1 font-['JetBrains_Mono',monospace]">of 49 classes</div>
+        <div class="text-[0.7rem] text-[#8c8077] mt-1 font-['JetBrains_Mono',monospace]">of 49 classes</div>
       </div>
-      <div class="bg-[#101828] border border-[#1e2d47] rounded-2xl p-5 relative overflow-hidden"
+      <div class="bg-[#ffffff] border border-[#ffffff] rounded-2xl p-5 relative overflow-hidden"
         style="border-top:2px solid #7c3aed">
-        <div id="kpiTop" class="text-xl font-extrabold tracking-[-0.04em] text-[#e8edf5] leading-tight mb-1 truncate font-['Anta',sans-serif]">—
+        <div id="kpiTop" class="text-xl font-extrabold tracking-[-0.04em] text-[#2d2926] leading-tight mb-1 truncate font-['Anta',sans-serif]">—
         </div>
         <div
-          class="text-[0.7rem] text-[#5a6a82] font-semibold uppercase tracking-[0.08em] font-['JetBrains_Mono',monospace]">
+          class="text-[0.7rem] text-[#8c8077] font-semibold uppercase tracking-[0.08em] font-['JetBrains_Mono',monospace]">
           Most Detected</div>
-        <div class="text-[0.7rem] text-[#5a6a82] mt-1 font-['JetBrains_Mono',monospace]">Dominant gesture</div>
+        <div class="text-[0.7rem] text-[#8c8077] mt-1 font-['JetBrains_Mono',monospace]">Dominant gesture</div>
       </div>
     </div>
 
@@ -272,28 +269,28 @@
     <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-5 mb-5">
 
       <!-- Top Gestures Card -->
-      <div class="bg-[#101828] border border-[#1e2d47] rounded-2xl overflow-hidden">
+      <div class="bg-[#ffffff] border border-[#ffffff] rounded-2xl overflow-hidden">
         <div
-          class="flex items-center justify-between px-5 py-3.5 border-b border-[#1e2d47] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#5a6a82] font-['JetBrains_Mono',monospace]">
+          class="flex items-center justify-between px-5 py-3.5 border-b border-[#ffffff] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#8c8077] font-['JetBrains_Mono',monospace]">
           Top Gestures by Frequency
           <span id="topGestureCount" class="text-[#00e5ff] text-[0.65rem]"></span>
         </div>
         <div class="p-5" id="topGesturesBody">
-          <div class="text-center py-8 text-[#5a6a82] text-sm font-['JetBrains_Mono',monospace]">No data yet — start
+          <div class="text-center py-8 text-[#8c8077] text-sm font-['JetBrains_Mono',monospace]">No data yet — start
             signing!</div>
         </div>
       </div>
 
       <!-- Accuracy Gauge Card -->
-      <div class="bg-[#101828] border border-[#1e2d47] rounded-2xl overflow-hidden">
+      <div class="bg-[#ffffff] border border-[#ffffff] rounded-2xl overflow-hidden">
         <div
-          class="px-5 py-3.5 border-b border-[#1e2d47] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#5a6a82] font-['JetBrains_Mono',monospace]">
+          class="px-5 py-3.5 border-b border-[#ffffff] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#8c8077] font-['JetBrains_Mono',monospace]">
           Accuracy Overview</div>
         <div class="p-5 flex flex-col items-center justify-center">
           <div id="gaugeNum" class="text-5xl font-extrabold tracking-[-0.06em] text-[#00ffa3] leading-tight font-['Anta',sans-serif]">—</div>
-          <div class="text-[0.7rem] text-[#5a6a82] font-['JetBrains_Mono',monospace] uppercase tracking-[0.08em] mt-1">
+          <div class="text-[0.7rem] text-[#8c8077] font-['JetBrains_Mono',monospace] uppercase tracking-[0.08em] mt-1">
             Avg Confidence</div>
-          <div id="gaugeSub" class="text-[0.75rem] text-[#5a6a82] mt-2 font-['JetBrains_Mono',monospace] text-center">
+          <div id="gaugeSub" class="text-[0.75rem] text-[#8c8077] mt-2 font-['JetBrains_Mono',monospace] text-center">
             Sign into the camera to begin</div>
           <canvas id="gaugeChart" style="max-width:160px; margin-top:1rem; max-height:100px;"></canvas>
         </div>
@@ -302,17 +299,17 @@
 
     <!-- Distribution Charts Row -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-      <div class="bg-[#101828] border border-[#1e2d47] rounded-2xl overflow-hidden">
+      <div class="bg-[#ffffff] border border-[#ffffff] rounded-2xl overflow-hidden">
         <div
-          class="px-5 py-3.5 border-b border-[#1e2d47] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#5a6a82] font-['JetBrains_Mono',monospace]">
+          class="px-5 py-3.5 border-b border-[#ffffff] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#8c8077] font-['JetBrains_Mono',monospace]">
           Gesture Distribution (Bar)</div>
         <div class="p-5">
           <canvas id="barChart"></canvas>
         </div>
       </div>
-      <div class="bg-[#101828] border border-[#1e2d47] rounded-2xl overflow-hidden">
+      <div class="bg-[#ffffff] border border-[#ffffff] rounded-2xl overflow-hidden">
         <div
-          class="px-5 py-3.5 border-b border-[#1e2d47] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#5a6a82] font-['JetBrains_Mono',monospace]">
+          class="px-5 py-3.5 border-b border-[#ffffff] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#8c8077] font-['JetBrains_Mono',monospace]">
           Gesture Distribution (Doughnut)</div>
         <div class="p-5 flex justify-center">
           <canvas id="donutChart" style="max-width:240px; max-height:240px;"></canvas>
@@ -321,9 +318,9 @@
     </div>
 
     <!-- Confidence Timeline -->
-    <div class="bg-[#101828] border border-[#1e2d47] rounded-2xl overflow-hidden mb-5">
+    <div class="bg-[#ffffff] border border-[#ffffff] rounded-2xl overflow-hidden mb-5">
       <div
-        class="px-5 py-3.5 border-b border-[#1e2d47] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#5a6a82] font-['JetBrains_Mono',monospace]">
+        class="px-5 py-3.5 border-b border-[#ffffff] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#8c8077] font-['JetBrains_Mono',monospace]">
         Confidence Timeline</div>
       <div class="p-5">
         <canvas id="lineChart" style="max-height:200px;"></canvas>
@@ -331,9 +328,9 @@
     </div>
 
     <!-- Recognition History Table with Infinite Scrolling -->
-    <div class="bg-[#101828] border border-[#1e2d47] rounded-2xl overflow-hidden mb-5">
+    <div class="bg-[#ffffff] border border-[#ffffff] rounded-2xl overflow-hidden mb-5">
       <div
-        class="flex items-center justify-between px-5 py-3.5 border-b border-[#1e2d47] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#5a6a82] font-['JetBrains_Mono',monospace]">
+        class="flex items-center justify-between px-5 py-3.5 border-b border-[#ffffff] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#8c8077] font-['JetBrains_Mono',monospace]">
         Recognition History
         <div class="flex items-center gap-3">
           <span id="histTableCount" class="text-[#00e5ff] text-[0.65rem]"></span>
@@ -347,28 +344,28 @@
         style="max-height: 400px; -webkit-overflow-scrolling: touch;">
         <div class="overflow-x-auto">
           <table class="w-full border-collapse min-w-[500px]">
-            <thead class="sticky top-0 bg-[#101828] z-10">
-              <tr class="border-b border-[#1e2d47]">
+            <thead class="sticky top-0 bg-[#ffffff] z-10">
+              <tr class="border-b border-[#ffffff]">
                 <th
-                  class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-[#5a6a82] font-['JetBrains_Mono',monospace] p-3 text-left w-[50px]">
+                  class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-[#8c8077] font-['JetBrains_Mono',monospace] p-3 text-left w-[50px]">
                   #</th>
                 <th
-                  class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-[#5a6a82] font-['JetBrains_Mono',monospace] p-3 text-left">
+                  class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-[#8c8077] font-['JetBrains_Mono',monospace] p-3 text-left">
                   Gesture</th>
                 <th
-                  class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-[#5a6a82] font-['JetBrains_Mono',monospace] p-3 text-left w-[90px]">
+                  class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-[#8c8077] font-['JetBrains_Mono',monospace] p-3 text-left w-[90px]">
                   Confidence</th>
                 <th
-                  class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-[#5a6a82] font-['JetBrains_Mono',monospace] p-3 text-left w-[70px]">
+                  class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-[#8c8077] font-['JetBrains_Mono',monospace] p-3 text-left w-[70px]">
                   Rating</th>
                 <th
-                  class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-[#5a6a82] font-['JetBrains_Mono',monospace] p-3 text-left w-[100px]">
+                  class="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-[#8c8077] font-['JetBrains_Mono',monospace] p-3 text-left w-[100px]">
                   Time</th>
               </tr>
             </thead>
             <tbody id="histTableBody">
               <tr>
-                <td colspan="5" class="text-center py-8 text-[#5a6a82] text-sm font-['JetBrains_Mono',monospace]">No
+                <td colspan="5" class="text-center py-8 text-[#8c8077] text-sm font-['JetBrains_Mono',monospace]">No
                   history yet.</td>
               </tr>
             </tbody>
@@ -385,12 +382,12 @@
 
         <!-- End of records indicator -->
         <div id="historyEndIndicator" class="text-center py-4 hidden">
-          <p class="text-[#5a6a82] text-xs font-['JetBrains_Mono',monospace]">✓ End of history</p>
+          <p class="text-[#8c8077] text-xs font-['JetBrains_Mono',monospace]">✓ End of history</p>
         </div>
       </div>
 
       <!-- Mobile clear button (visible only on small screens) -->
-      <div class="sm:hidden p-3 border-t border-[#1e2d47]">
+      <div class="sm:hidden p-3 border-t border-[#ffffff]">
         <button id="clearHistoryBtnMobile"
           class="w-full text-[0.7rem] py-2 rounded border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-all">Clear
           History</button>
@@ -398,9 +395,9 @@
     </div>
 
     <!-- All Gestures Coverage -->
-    <div class="bg-[#101828] border border-[#1e2d47] rounded-2xl overflow-hidden">
+    <div class="bg-[#ffffff] border border-[#ffffff] rounded-2xl overflow-hidden">
       <div
-        class="flex items-center justify-between px-5 py-3.5 border-b border-[#1e2d47] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#5a6a82] font-['JetBrains_Mono',monospace]">
+        class="flex items-center justify-between px-5 py-3.5 border-b border-[#ffffff] text-[0.75rem] font-bold uppercase tracking-[0.08em] text-[#8c8077] font-['JetBrains_Mono',monospace]">
         All Gesture Classes Coverage
         <span id="coveragePct" class="text-[#00ffa3] text-[0.65rem]"></span>
       </div>
@@ -436,7 +433,7 @@
     // Initialize all charts
     function initCharts() {
       Chart.defaults.color = '#5a6a82';
-      Chart.defaults.borderColor = '#1e2d47';
+      Chart.defaults.borderColor = '#ffffff';
       Chart.defaults.font.family = "'JetBrains Mono', monospace";
 
       const barCtx = document.getElementById('barChart').getContext('2d');
@@ -463,7 +460,7 @@
       const gaugeCtx = document.getElementById('gaugeChart').getContext('2d');
       gaugeChart = new Chart(gaugeCtx, {
         type: 'doughnut',
-        data: { datasets: [{ data: [0, 100], backgroundColor: ['#00ffa3', '#1e2d47'], borderWidth: 0 }] },
+        data: { datasets: [{ data: [0, 100], backgroundColor: ['#00ffa3', '#ffffff'], borderWidth: 0 }] },
         options: { responsive: true, maintainAspectRatio: true, cutout: '80%', plugins: { legend: { display: false } }, rotation: -90, circumference: 180 }
       });
     }
@@ -513,16 +510,16 @@
         topBody.innerHTML = topGestures.map(g => `
       <div class="mb-3">
         <div class="flex justify-between items-baseline mb-1.5">
-          <div class="text-[0.8rem] font-bold uppercase tracking-[0.02em] text-[#e8edf5] font-['Anta',sans-serif]">${g.gesture.replace(/_/g, ' ')}</div>
-          <div class="text-[0.7rem] text-[#5a6a82] font-['JetBrains_Mono',monospace]">${g.count}× · ${g.pct}%</div>
+          <div class="text-[0.8rem] font-bold uppercase tracking-[0.02em] text-[#2d2926] font-['Anta',sans-serif]">${g.gesture.replace(/_/g, ' ')}</div>
+          <div class="text-[0.7rem] text-[#8c8077] font-['JetBrains_Mono',monospace]">${g.count}× · ${g.pct}%</div>
         </div>
-        <div class="h-1.5 bg-[#1e2d47] rounded-full overflow-hidden">
+        <div class="h-1.5 bg-[#ffffff] rounded-full overflow-hidden">
           <div class="h-full rounded-full bg-gradient-to-r from-[#7c3aed] to-[#00e5ff] transition-all duration-300" style="width: ${(g.count / maxCount * 100).toFixed(1)}%"></div>
         </div>
       </div>
     `).join('');
       } else {
-        topBody.innerHTML = '<div class="text-center py-8 text-[#5a6a82] text-sm font-["JetBrains_Mono",monospace]">No data yet — start signing!</div>';
+        topBody.innerHTML = '<div class="text-center py-8 text-[#8c8077] text-sm font-["JetBrains_Mono",monospace]">No data yet — start signing!</div>';
       }
 
       // Bar and Donut charts
@@ -564,16 +561,16 @@
           else { badgeCls = 'bg-[#ff8c42]/10 text-[#ff8c42] border border-[#ff8c42]/20'; rating = 'LOW'; }
           return `
         <tr class="border-b border-white/5 hover:bg-white/5">
-          <td class="p-3 text-[#5a6a82] font-['JetBrains_Mono',monospace] text-[0.75rem]">${i + 1}</td>
+          <td class="p-3 text-[#8c8077] font-['JetBrains_Mono',monospace] text-[0.75rem]">${i + 1}</td>
           <td class="p-3 font-bold uppercase tracking-[0.04em] text-[0.8rem] font-['Anta',sans-serif]">${h.gesture.replace(/_/g, ' ')}</td>
           <td class="p-3 font-['JetBrains_Mono',monospace] text-[#00ffa3] text-[0.8rem]">${conf}%</td>
           <td class="p-3"><span class="inline-block px-2 py-0.5 rounded text-[0.65rem] font-bold uppercase tracking-[0.05em] font-['JetBrains_Mono',monospace] ${badgeCls}">${rating}</span></td>
-          <td class="p-3 font-['JetBrains_Mono',monospace] text-[0.7rem] text-[#5a6a82]">${h.timestamp}</td>
+          <td class="p-3 font-['JetBrains_Mono',monospace] text-[0.7rem] text-[#8c8077]">${h.timestamp}</td>
         </tr>
       `;
         }).join('');
       } else {
-        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-[#5a6a82] text-sm font-["JetBrains_Mono",monospace]">No history yet.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-[#8c8077] text-sm font-["JetBrains_Mono",monospace]">No history yet.</td></tr>';
       }
 
       // Infinite Scroll Configuration
@@ -666,11 +663,11 @@
           const row = document.createElement('tr');
           row.className = 'border-b border-white/5 history-row-new';
           row.innerHTML = `
-      <td class="p-3 text-[#5a6a82] font-['JetBrains_Mono',monospace] text-[0.75rem]">${globalIndex}</td>
+      <td class="p-3 text-[#8c8077] font-['JetBrains_Mono',monospace] text-[0.75rem]">${globalIndex}</td>
       <td class="p-3 font-bold uppercase tracking-[0.04em] text-[0.8rem] break-word font-['Anta',sans-serif]">${h.gesture.replace(/_/g, ' ')}</td>
       <td class="p-3 font-['JetBrains_Mono',monospace] text-[#00ffa3] text-[0.8rem]">${conf}%</td>
       <td class="p-3"><span class="inline-block px-2 py-0.5 rounded text-[0.65rem] font-bold uppercase tracking-[0.05em] font-['JetBrains_Mono',monospace] ${badgeCls}">${rating}</span></td>
-      <td class="p-3 font-['JetBrains_Mono',monospace] text-[0.7rem] text-[#5a6a82]">${h.timestamp}</td>
+      <td class="p-3 font-['JetBrains_Mono',monospace] text-[0.7rem] text-[#8c8077]">${h.timestamp}</td>
     `;
           tbody.appendChild(row);
         });
@@ -721,7 +718,7 @@
           allHistoryData = [];
           const tbody = document.getElementById('histTableBody');
           if (tbody) {
-            tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-[#5a6a82] text-sm font-[\'JetBrains_Mono\',monospace]">No history yet.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-[#8c8077] text-sm font-[\'JetBrains_Mono\',monospace]">No history yet.</td></tr>';
           }
           document.getElementById('histTableCount').textContent = '0 records';
           hasMoreData = false;
@@ -741,7 +738,7 @@
         allHistoryData = [];
         const tbody = document.getElementById('histTableBody');
         if (tbody) {
-          tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-[#5a6a82] text-sm font-[\'JetBrains_Mono\',monospace]">No history yet.</td></tr>';
+          tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-[#8c8077] text-sm font-[\'JetBrains_Mono\',monospace]">No history yet.</td></tr>';
         }
         document.getElementById('histTableCount').textContent = '0 records';
       }
@@ -769,11 +766,11 @@
       document.getElementById('coveragePct').textContent = `${detectedCount}/${CLASSES.length} detected (${((detectedCount / CLASSES.length) * 100).toFixed(0)}%)`;
       document.getElementById('gestureGrid').innerHTML = CLASSES.map(g => {
         const cnt = allCounts[g] || 0;
-        const activeClass = cnt > 0 ? 'border-[#00e5ff]/30 bg-[#00e5ff]/5' : 'border-[#1e2d47]';
+        const activeClass = cnt > 0 ? 'border-[#00e5ff]/30 bg-[#00e5ff]/5' : 'border-[#ffffff]';
         return `
-      <div class="bg-[#0b1121] border ${activeClass} rounded-lg p-2 transition-all">
-        <div class="text-[0.7rem] font-bold uppercase tracking-[0.03em] text-[#e8edf5] truncate font-['Anta',sans-serif]">${g.replace(/_/g, ' ')}</div>
-        <div class="text-[0.65rem] text-[#5a6a82] font-['JetBrains_Mono',monospace]">${cnt > 0 ? cnt + ' times' : 'not yet'}</div>
+      <div class="bg-[#f3efe6] border ${activeClass} rounded-lg p-2 transition-all">
+        <div class="text-[0.7rem] font-bold uppercase tracking-[0.03em] text-[#2d2926] truncate font-['Anta',sans-serif]">${g.replace(/_/g, ' ')}</div>
+        <div class="text-[0.65rem] text-[#8c8077] font-['JetBrains_Mono',monospace]">${cnt > 0 ? cnt + ' times' : 'not yet'}</div>
       </div>
     `;
       }).join('');
